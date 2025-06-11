@@ -1,0 +1,59 @@
+
+@use '../../primary/' as *
+@use '../__conf' as *
+@use '../../../app/view/__conf' as *
+
+
+.shd-wht
+    box-shadow: 0px 0px 0px 0.3rem $btn-wht-shd
+
+.fx-hv-shd-wht:hover
+    @extend .shd-wht
+.fx-fcs-shd-wht:active, .fx-fcs-shd-wht:focus, .fx-fcs-shd-wht:focus-visible
+    @extend .shd-wht
+
+.btn-wht
+    border-color: #fff
+    background: transparent
+    background: #fff
+    @extend .fx-hv-shd-wht
+    @extend .fx-fcs-shd-wht
+
+.btn-wht-s
+    background: rgba(255, 255, 255, 0.4)
+    backdrop-filter: blur(3px)
+    &:hover
+        background: $btn-wht-hv
+    &:active, &:focus, &:focus-visible
+        background: $btn-wht-shd
+    @extend .fx-hv-shd-wht
+    @extend .fx-fcs-shd-wht
+
+
+.fx-aii-bd-wht-out
+    border: $bd solid $btn-wht-out-bd
+    &:hover
+        border-color: $btn-wht-out-bd-hv
+    &:active, &:focus, &:focus-visible
+        border-color: $btn-wht-out-bd-fcs
+
+.fx-aii-bc-wht-out
+    background: $btn-wht-out-bc
+    &:hover
+        background: $btn-wht-out-bc-hv
+    &:active, &:focus, &:focus-visible
+        background: $btn-wht-out-bc-fcs
+
+.shd-wht-out
+    box-shadow: 0px 0px 0px 0.3rem $def
+.fx-aii-shd-wht-out:hover
+    @extend .shd-wht-out
+.fx-aii-shd-wht-out:active, .fx-fcs-shd-wht:focus, .fx-fcs-shd-wht:focus-visible
+    @extend .shd-wht-out
+
+.btn-wht-out
+    @extend .fx-aii-bc-wht-out
+    @extend .fx-aii-bd-wht-out
+    @extend .fx-aii-shd-wht-out
+
+        
