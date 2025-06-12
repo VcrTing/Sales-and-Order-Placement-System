@@ -8,5 +8,5 @@ export const for_app_loading = () => promise(() => {
     // 加载城市
     // pageIndexDispatch('change', [ 'city', DATA_CITY_DEF ])
     // 加载屏幕宽高
-    uiDispatch('asyncwh')
+    uiDispatch('async_system_info')
 })

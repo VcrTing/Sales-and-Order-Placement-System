@@ -61,7 +61,7 @@ uni-input, uni-textarea
   &, &:hover, &:active, &:focus, &:focus-visible
     outline: none
   
-uni-button
+uni-button, button
   font-size: 1em !important
   line-height: $ih !important
 

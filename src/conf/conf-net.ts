@@ -1,25 +1,45 @@
 import { authGetters, authState } from "@/memory/global"
-import { IS_NET_LOG, is_strapi_mode, IS_TEST_MODE } from "./conf"
-import { NET_ENDPOINT_FILE, NET_ENDPOINTS_MASTER } from "./conf-endpoints"
+import { IS_NET_LOCAL, IS_NET_LOG, is_strapi_mode, IS_TEST_MODE } from "./conf"
+import { NET_ENDPOINT_BUSINESS, NET_ENDPOINT_FILE, NET_ENDPOINTS_MASTER } from "./conf-endpoints"
 
 
 // 数据来源
 export const MASTER: string = 'MASTER'
 // 数据来源
 export const FILE: string = 'FILE'
+// 数据来源
+export const SMALL: string = 'SMALL'
+// 数据来源
+export const BUSINESS: string = 'BUSINESS'
+
+const __API_NAME = 'api'
 
 // 全局配置
 export const NET = {
     MASTER: {
-        URI: is_strapi_mode() ? 'http://localhost:1337' : '',
-        API: is_strapi_mode() ? 'api' : 'api',
+        URI: IS_NET_LOCAL ? 'http://localhost:1337' : '',
+        API: __API_NAME,
         TIMEOUT_GET: 1000 * 30,
         TIMEOUT_POS: 1000 * 30,
         IS_LOG: true
     },
     FILE: {
-        URI: is_strapi_mode() ? 'http://localhost:8888' : '',
-        API: is_strapi_mode() ? 'api' : 'api',
+        URI: IS_NET_LOCAL ? 'http://localhost:8888' : '',
+        API: __API_NAME,
+        TIMEOUT_GET: 1000 * 30,
+        TIMEOUT_POS: 1000 * 30,
+        IS_LOG: true
+    },
+    SMALL: {
+        URI: IS_NET_LOCAL ? 'http://localhost:8888' : '',
+        API: __API_NAME + '/small',
+        TIMEOUT_GET: 1000 * 30,
+        TIMEOUT_POS: 1000 * 30,
+        IS_LOG: true
+    },
+    BUSINESS: {
+        URI: IS_NET_LOCAL ? 'http://localhost:8888' : '',
+        API: __API_NAME,
         TIMEOUT_GET: 1000 * 30,
         TIMEOUT_POS: 1000 * 30,
         IS_LOG: true
@@ -55,7 +75,9 @@ export const NET_FUNCTION_GET_JWT = (): string => {
 // 网站的 endpoint，key 名字和 上面的要对应
 export const NET_ENDPOINTS = <ONEO>{
     'MASTER': NET_ENDPOINTS_MASTER,
-    'FILE': NET_ENDPOINT_FILE
+    'FILE': NET_ENDPOINT_FILE,
+    'SMALL': NET_ENDPOINT_FILE,
+    'BUSINESS': NET_ENDPOINT_BUSINESS
 }
 
 /**

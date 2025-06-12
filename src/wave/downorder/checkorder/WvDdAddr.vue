@@ -4,8 +4,8 @@
             <view class="fx-s">
                 <view class="w-50" v-for="(v, i) in aii.tab" :key="i">
                     <view class="fx-c py-x2 br-ti-s br-tr-s fx-aii-btn-def"
-                        :class="aii.iive == v.v ? 'err bg-con' : 'bg-def'"
-                        @tap="aii.iive = v.v"
+                        :class="form.sendType == v.v ? 'err bg-con' : 'bg-def'"
+                        @tap="form.sendType = v.v"
                     >
                         <view class="h6 fw-550">
                             <text>
@@ -16,7 +16,7 @@
                 </view>
             </view>
             <view class="px-col py-col bg-con br-bi-s br-br-s">
-                <view v-if="aii.iive == 0" class="py">
+                <view v-if="form.sendType == 0" class="py">
                     <view class="py-col">
                         <OButton color="def" clazz="br-t py" :weak="true">
                             <view class="fx-s py-col">
@@ -44,7 +44,7 @@
                         </OButton>
                     </view>
                 </view>
-                <view v-if="aii.iive == 1">
+                <view v-if="form.sendType == 1">
                     <view class="h-12vh fx-c tid">
                         <view>
                             暂时不支持自提，请谅解。
@@ -67,7 +67,6 @@ const prp = defineProps<{
 
 
 const aii = reactive({
-    iive: 0,
     tab: [
         { name: '外送', v: 0 },
         { name: '自提', v: 1 }

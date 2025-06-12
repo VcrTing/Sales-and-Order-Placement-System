@@ -27,8 +27,9 @@ import WvIndexTop from '@/wave/index/WvIndexTop.vue';
 import WvIndexPag from '@/wave/index/WvIndexPag.vue';
 import CkZzc from '@/cake/visual/zzc/CkZzc.vue';
 import { future } from '@/tool/util/future';
+import { BUSINESS_DEF } from '@/conf/conf-role';
 
-const user = computed(() => authState.user)
+const user = computed(() => BUSINESS_DEF)
 
 const aii = reactive({
 	h: 83.6

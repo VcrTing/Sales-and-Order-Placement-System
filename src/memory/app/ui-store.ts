@@ -6,7 +6,7 @@ const DEF_CAPACITY = 14
 const _uiStore: Store<UiStore> = createStore({
     
     state: <UiStore>{
-        platform: 'phone',
+        platform: 'mp-weixin',
         root_font_size: 16,
         root_font_size_coefficient: 16,
         w: 375,
@@ -31,10 +31,11 @@ const _uiStore: Store<UiStore> = createStore({
         },
 
         //
-        asyncwh: async ({ state }) => {
+        async_system_info: async ({ state }) => {
             const info = await uni.getSystemInfo()
             state.w = info.screenWidth || 375;
             state.h = info.windowWidth || 750;
+            state.platform = info.platform
         }
     }
 })

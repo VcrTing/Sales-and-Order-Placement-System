@@ -22,22 +22,20 @@
 <script setup lang="ts">
 import CkAvatar from '@/cake/visual/avatar/CkAvatar.vue';
 import { APP_GENERATE_DETAIL } from '@/conf/conf-app';
+import { BUSINESS_DEF } from '@/conf/conf-role';
 import { authState, needLogin } from '@/memory/global';
+import serv_small from '@/server/auth/serv_small';
 import uniSmall from '@/tool/uni/uni-small';
+import { future } from '@/tool/util/future';
 import { computed } from 'vue';
 
 // const prp = defineProps<{}>()
 
-const user = computed(() => authState.user)
+const user = computed(() => BUSINESS_DEF)
 
 const funn = {
     login: async () => {
-        uniSmall.gettoken((e: ONE, code: string) => {
-            console.log('token e =', code)
-        },
-        (err: ONE) => {
-            console.log('token fail =', err)
-        })
+        
     },
     userinfo: async () => {
         uniSmall.getuserinfo((e: ONE) => {

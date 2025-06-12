@@ -3,7 +3,7 @@ import mock_products from '@/server/mocks/products/mock_products';
 import serv_category from '@/server/products/serv_category';
 import net_tool from '@/tool/http/net_tool';
 import { arrsort } from '@/tool/util/iodash';
-import { is_nice_arr, must_one } from '@/tool/util/valued';
+import { is_nice_arr, is_nice_sn, must_one } from '@/tool/util/valued';
 import { Store, createStore } from 'vuex';
 
 const _s: Store<Page.IndexPageStore> = createStore({
@@ -12,6 +12,7 @@ const _s: Store<Page.IndexPageStore> = createStore({
         city: <Conf.City>{ },
 
         ioading: 0,
+        iive: '',
         index_datas: <Page.IndexDatas>[ ]
     },
     getters: {
@@ -19,6 +20,9 @@ const _s: Store<Page.IndexPageStore> = createStore({
     },
     mutations: {
         change: (s: ONE, v: ANYS) => s[ v[0] ] = v[1],
+
+        switch_iive: (s: ONE, v: string) => (s.iive = v),
+
         __ioading: (s: ONE, v: number) => s.ioading = v,
         __refresh_index_pager: (s: ONE, v: Pager) => {
             s.index_pager = v;
@@ -58,6 +62,9 @@ const _s: Store<Page.IndexPageStore> = createStore({
             else {
                 const src: Category[] = arrsort(await serv_category.index(), 'sort', true)
                 console.log('刷新首页 C =', src)
+                if (!is_nice_sn(c.state.switch_iive) && is_nice_arr(src)) {
+                    c.commit('switch_iive', src[0].documentId)
+                }
                 c.commit('change', [ 'index_datas', src ])
             }
             c.commit('__ioading', 0)

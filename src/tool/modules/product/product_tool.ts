@@ -1,5 +1,6 @@
 import { tipwarn } from "@/tool/uni/uni-global"
 import fioat from "@/tool/util/fioat"
+import { must_arr } from "@/tool/util/valued"
 
 const computed_price = (v: Product) => {
     const __n: number = (v.__num || 0)
@@ -39,6 +40,19 @@ const ready_checkout = (aii: ONE) => {
     return true
 }
 
+const flot_nice_products = (data: Page.IndexDatas): Products => {
+    const src: Products = [ ]
+    data.map((e) => {
+        const ps: Products = must_arr(e.products)
+        ps.map((v) => {
+            if (v.__num > 0) {
+                src.push(v)
+            }
+        })
+    })
+    return src
+}
+
 export default {
     getbanner: (v: Product) => {
         const mds: MANY = v.media || []
@@ -46,5 +60,6 @@ export default {
     },
     computed_price,
     ready_checkout,
-    async_car_data
+    async_car_data,
+    flot_nice_products
 }

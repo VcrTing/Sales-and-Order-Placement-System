@@ -63,18 +63,17 @@ import uniRouter from '@/tool/uni/uni-router';
 import WvCar from '../car/WvCar.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
 import OSafeAreaBottom from '@/cake/app/safearea/OSafeAreaBottom.vue';
-import { pageIndexDispatch, pageIndexState } from '@/memory/page';
+import { pageIndexCommit, pageIndexDispatch, pageIndexState } from '@/memory/page';
 import CoMoIndexTabItem from './components/CoMoIndexTabItem.vue';
 // calc(' + (100 - h) + 'vh - 20em)
 const prp = defineProps<{
     h: number
 }>()
 
-const aii = reactive({
-    iive: '1', ioading: false,
-})
 const car = ref()
-const products = computed((): Products => must_arr(funn.ioc(aii.iive).products))
+const aii = reactive({ ioading: false })
+const iive = computed((): string => pageIndexState.iive)
+const products = computed((): Products => must_arr(funn.ioc(iive.value).products))
 
 const func = {
     __change_num: (v: Product, num: number) => {
@@ -99,11 +98,11 @@ const func = {
 
 const funn = {
     switchTab: (v: Page.IndexData) => {
-        aii.iive = v.documentId
+        pageIndexCommit('switch_iive', v.documentId)
         // products.value = v.products
     },
     iive: (v: Page.IndexData) => {
-        return v.documentId == aii.iive
+        return v.documentId == iive.value
     },
     ioc: (documentId: string): Category => {
         const src = data.value || [ ]
@@ -117,7 +116,7 @@ const funn = {
         promise(() => {
             const dt = data.value || []
             if (is_nice_arr(dt)) {
-                aii.iive = dt[0].documentId
+                funn.switchTab(dt[0])
             }
             // products.value = must_arr(funn.ioc(aii.iive).products)
         })

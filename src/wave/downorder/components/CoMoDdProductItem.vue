@@ -1,7 +1,7 @@
 <template>
     <view class="fx-s">
-        <view class="w-17">
-            <view class="w-100 h-7vh">
+        <view class="w-15">
+            <view class="w-100 h-6vh">
                 <CkAvatar v-if="product_tool.getbanner(v).url" clazz="h-100" :src="product_tool.getbanner(v).url"/>
                 <view v-else class="w-100 h-100 bg-def br-t"></view>
             </view>

@@ -1,6 +1,7 @@
 import { is_strapi_mode } from "@/conf/conf"
 import strapi_param_tool from "../strapi/strapi_param_tool"
 import { authGetters } from "@/memory/global"
+import { is_nice_arr, must_arr, must_one } from "../util/valued"
 
 
 const PAGER_SIZE_DEF = 10
@@ -48,10 +49,24 @@ const data = <T>(src: NET_RES) => {
     return (src as HttpResult).data as T
 }
 
+const ones = <T>(src: ONE | MANY | undefined): T[] => {
+    return is_nice_arr(src) ? (must_arr(src) as T[]) : <T[]>[]
+}
+const one = <T>(src: ONE | MANY): T => {
+    return !is_nice_arr(src) ? (must_one(src)) : <T>{ }
+}
+
+const group_document_id = (src: string, param: ONE = { }): ONE => {
+    param['documentId'] = src
+    return param
+}
+
 export default {
     generate_pagination,
     build_param,
     limit_mine,
     build_data,
-    data
+    data,
+    one, ones,
+    group_document_id
 }

@@ -26,7 +26,7 @@ const _s: Store<AuthStore> = createStore({
         num: 0,
         loginhouse: {
             pan_idx: 1000,
-            pan_hui: { opacity: 0.4 },
+            pan_hui: { opacity: 0, close: false, kiii: true },
             iive: true
         }
     },
@@ -44,15 +44,14 @@ const _s: Store<AuthStore> = createStore({
         _num: (s: ONE) => {
             s.num = s.num + 1
         },
-        _login: (s: ONE, auth: ONE) => {
+        __login: (s: ONE, auth: ONE) => {
             storage.set('jwt', auth.token)
             s.user = auth.user 
             s.jwt = auth.token 
             s.role = ROLE_AUTH
-
             s.loginhouse.iive = false
         },
-        _logout: (s: ONE) => {
+        __logout: (s: ONE) => {
             storage.remove('jwt')
             s.company = { }
             s.user = USER_DEF
@@ -73,17 +72,18 @@ const _s: Store<AuthStore> = createStore({
         login: ({ commit }, auth: ONE) => {
             storage.set('auth', auth)
             console.log('auth =', auth)
-            commit('_login', auth)
+            commit('__login', auth)
         },
         logout: ({ commit }) => {
-            commit('_logout')
+            commit('__logout')
         },
         // 1 自动登录成功，0 已经登录了，-1 
         auto_login: ({ getters, commit }): AutoLoginStatus => {
             if (!getters.is_login) {
                 const auth: ONE | undefined = storage.get('auth')
                 if (auth) {
-                    commit('_login', auth); 
+                    console.log('自动登录成功 =', auth)
+                    commit('__login', auth); 
                     return AutoLoginStatus.AUTO_SUCCESS
                 } 
                 return AutoLoginStatus.AUTO_FAIL

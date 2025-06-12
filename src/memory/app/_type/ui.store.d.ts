@@ -2,7 +2,7 @@
 // STORE APP
 interface UiStore {
     // 当前 平台
-    platform: UI_PLATFORM
+    platform: string
 
     // 字体 大小，影响 继承 字体的 大小，以及 em 单位
     root_font_size: number
@@ -18,4 +18,4 @@ type UI_STORE_FIELD =
     'root_font_size' | 'root_font_size_coefficient'
 
 // 大致平台分类
-type UI_PLATFORM = 'phone' | 'pad' | 'pc'
+type UI_PLATFORM = 'mp-weixin' | 'pad' | 'pc'

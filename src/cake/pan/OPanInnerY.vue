@@ -8,7 +8,7 @@
         </view>
 
         <OScrollY
-            :clazz="clazz"
+            :clazz="__clazz"
             :styie="{
                 'height': h ? h : '30vh'
             }">
@@ -40,10 +40,13 @@ import pan_tooi from '@/tool/app/pan_tooi';
 import OSafeAreaBottom from '../app/safearea/OSafeAreaBottom.vue';
 import OScrollY from '../ux/scroll/OScrollY.vue';
 import { computed } from 'vue';
-const prp = defineProps<{ idx: number, orientation: ORIENTATION, h?:string, close?: boolean }>()
+const prp = defineProps<{ 
+    idx: number, orientation: ORIENTATION, h?:string, close?: boolean,
+    clazz?: string
+}>()
 
-const clazz = computed(() => {
+const __clazz = computed(() => {
     const src = (prp.orientation == 't') ? ' br-br br-bi ' : ' br-tr br-ti '
-    return src + ' pan-con o-h bg-con'
+    return src + ' pan-con o-h bg-con ' + prp.clazz
 })
 </script>

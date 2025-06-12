@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CoSmallGlobal from '@/components/global/CoSmallGlobal.vue';
 import AppMeta from '@/conf/AppMeta.vue';
 
 </script>
@@ -10,5 +11,6 @@ import AppMeta from '@/conf/AppMeta.vue';
         <!-- 全局
         <CakeGlobal/>
         -->
+        <CoSmallGlobal/>
     </AppMeta>
 </template>

@@ -7,7 +7,7 @@
             <view class="py-col">
                 <view>
                     <view v-for="(c, a) in data" :key="a">
-                        <view class="py" v-for="(v, i) in c.products" :key="i">
+                        <view class="py" v-for="(v, i) in funn.products(c.products)" :key="i">
                             <view class="px-inp fx-aii-btn-def">
                                 <CoMoDdProductItem :v="v"/>
                             </view>
@@ -15,7 +15,7 @@
                     </view>
                 </view>
                 <view class="py px-inp">
-                    <view class="fx-s">
+                    <view class="fx-s pt">
                         <view></view>
                         <view>
                             <text class="">合计</text>
@@ -42,6 +42,7 @@ import CoMoDdProductItem from '../components/CoMoDdProductItem.vue';
 import WvDdRemarkBlock from '../remark/WvDdRemarkBlock.vue';
 import product_tool from '@/tool/modules/product/product_tool';
 import { future } from '@/tool/util/future';
+import { must_arr } from '@/tool/util/valued';
 
 const prp = defineProps<{
     data: Page.IndexDatas,
@@ -53,7 +54,10 @@ const aii = prp.form
 const emt = defineEmits([ 'submit' ])
 
 const funn = {
-    
+    products: (pds: Products) => {
+        const src: Products = must_arr(pds).filter((e: Product) => e.__num > 0)
+        return src
+    }
 }
 
 defineExpose(funn)

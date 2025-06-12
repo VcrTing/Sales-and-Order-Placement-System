@@ -8,6 +8,11 @@ public final class QVUtil {
         return !StringUtils.hasLength(v);
     }
 
+    public static String serStr(Object src) {
+        if (src == null) return "";
+        return src.toString();
+    }
+
     public static Integer serInt(Object src, Integer def) {
         if (src == null) return def;
         if (src instanceof String) {

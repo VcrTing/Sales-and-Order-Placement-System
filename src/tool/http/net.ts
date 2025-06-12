@@ -134,7 +134,7 @@ class Net extends NeTooi {
         // 请求 配置
         const __config: UniApp.RequestOptions = this._config_pos(__url, data, this.jwt(), is_file)
         if (this.is_log) {
-            console.log("POST", __url, __config)
+            console.log("POST", __url, __config, data)
         }
         // 返回
         return this.adapter(__config);
@@ -147,7 +147,7 @@ class Net extends NeTooi {
         // 请求 配置
         const __config: UniApp.RequestOptions = this._config_put(__url, data, this.jwt(), false)
         if (this.is_log) {
-            console.log("PUT", __url, __config)
+            console.log("PUT", __url, __config, data)
         }
         // 返回
         return this.adapter(__config);

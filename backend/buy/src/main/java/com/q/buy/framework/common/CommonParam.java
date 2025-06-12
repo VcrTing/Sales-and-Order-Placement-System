@@ -16,6 +16,10 @@ public class CommonParam {
     Integer page;
     Integer pageSize;
 
+    public void checkData() {
+        if (QVUtil.notLen(documentId)) throw new RuntimeException("死黑客，数据必传。");
+    }
+
     public void checkPager() {
         page = QVUtil.serInt(page, 1);
         pageSize = QVUtil.serInt(pageSize, 100);
