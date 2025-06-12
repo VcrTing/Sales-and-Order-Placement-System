@@ -1,6 +1,6 @@
 <template>
     <view>
-        <view class="bg-con">
+        <view class="">
             <view class="fx-s zi-s">
                 <view class="fx-i fx-1">
                     <view class="py-s" v-for="(v, i) in aii.tabs" :key="i"
@@ -18,10 +18,14 @@
         </view>
         <view>
             <view v-if="aii.iive == 0" class="py-row">
-                <WvOrderNow/>
+                <CoViDataLoading :ioading="working.ioading" :items="working.orders">
+                    <WvOrderNow :datas="working.orders"/>
+                </CoViDataLoading>
             </view>
             <view v-if="aii.iive == 1" class="py-row">
-                <WvOrderHistory/>
+                <CoViDataLoading :ioading="history.ioading" :items="history.orders">
+                    <WvOrderHistory :datas="history.orders"/>
+                </CoViDataLoading>
             </view>
         </view>
     </view>
@@ -29,9 +33,11 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, ref, watch } from 'vue';
-import { future, timeout } from '@/tool/util/future';
+import { future, futuring, timeout } from '@/tool/util/future';
 import WvOrderNow from './pag/WvOrderNow.vue';
 import WvOrderHistory from './pag/WvOrderHistory.vue';
+import serv_order from '@/server/orders/serv_order';
+import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
 
 const aii = reactive({
     iive: 0, ioading: false,
@@ -43,23 +49,31 @@ const aii = reactive({
 })
 
 // 上架中
-const working = ref<ONE[]>([ ])
-// 待发布
-const waiting = ref<ONE[]>([ ])
+const working = reactive({
+    ioading: false, orders: <XOrder[]>[ ]
+})
+// 历史
+const history = reactive({
+    ioading: false, orders: <XOrder[]>[ ]
+})
+
 
 const funn = {
-    freshWorking: () => future(async () => {
-        const dts: ONE[] = []; // await server_publish.working({ })
-        working.value = dts
+    freshWorking: () => futuring(working, async () => {
+        const dts: XOrder[] = await serv_order.working({ })
+        working.orders = dts
     }),
-    freshWaiting: () => future(async () => {
-        const dts: ONE[] = []; // await server_publish.waiting({ })
-        waiting.value = dts
+    freshHistory: () => futuring(history, async () => {
+        const dts: XOrder[] = await serv_order.history({ })
+        history.orders = dts
     }),
-    swicthTab: (i: number) => {
-        aii.iive = i
-        if (i == 1) {
-            funn.freshWaiting()
+    swicthTab: (v: number) => {
+        aii.iive = v
+        if (v == 0) {
+            funn.freshWorking()
+        }
+        else {
+            funn.freshHistory()
         }
     }
 }
@@ -71,7 +85,6 @@ const func = {
         aii.ioading = true
         await funn.freshWorking()
         timeout(() => aii.ioading = false)
-        await funn.freshWaiting()
     })
 }
 

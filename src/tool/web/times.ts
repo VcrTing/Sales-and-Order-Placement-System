@@ -85,7 +85,7 @@ const generate_picker_data = (v: string | null): Co.TimePieckerForm => {
 
 
 export default {
-    fmt, fii,
+    fmt, fmts, fii,
     add, serh, build, bigger,
     group_date,
     ioc_week_name,

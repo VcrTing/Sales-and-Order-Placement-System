@@ -43,16 +43,19 @@
             </view>
         </view>
 		<view class="abs-b i-0 zi-s ps-f px-row r-0">
-			<WvCar v-show="showbar" clazz="ani-fade-b" :data="data" :ioading="aii.ioading" ref="car"/>
-            <OSafeAreaBottom/>
+			<WvCar v-show="showbar" clazz="ani-fade-b" @view="funn.openPan()"
+                :data="data" :ioading="aii.ioading" ref="car"/>
 		</view>
+        <WvCarPan :idx="pan.idx" :datas="data" :ioading="dataLoading"
+            @add="func.add"
+            @min="func.min"
+        />
     </view>
 </template>
 
 <script setup lang="ts">
 import OScrollY from '@/cake/ux/scroll/OScrollY.vue';
 import CoViDataLoading from '@/components/visual/ioading/CoViDataLoading.vue';
-import mock_products from '@/server/mocks/products/mock_products';
 import { promise } from '@/tool/util/future';
 import { arrfindi } from '@/tool/util/iodash';
 import { is_nice_arr, must_arr, must_one } from '@/tool/util/valued';
@@ -62,9 +65,10 @@ import CoMoIndexProductItem from './components/CoMoIndexProductItem.vue';
 import uniRouter from '@/tool/uni/uni-router';
 import WvCar from '../car/WvCar.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
-import OSafeAreaBottom from '@/cake/app/safearea/OSafeAreaBottom.vue';
 import { pageIndexCommit, pageIndexDispatch, pageIndexState } from '@/memory/page';
 import CoMoIndexTabItem from './components/CoMoIndexTabItem.vue';
+import pan_tooi from '@/tool/app/pan_tooi';
+import WvCarPan from '../car/WvCarPan.vue';
 // calc(' + (100 - h) + 'vh - 20em)
 const prp = defineProps<{
     h: number
@@ -124,7 +128,11 @@ const funn = {
     refresh: () => promise(() => {
         if (dataLoading.value) return;
         pageIndexDispatch('ioad_category')
-    })
+    }),
+    
+    openPan: () => {
+        pan_tooi.open_def_b(pan.idx, pan.hui)
+    },
 }
 
 nextTick(funn.init)
@@ -133,6 +141,8 @@ const scrollh = computed(() => ('calc(' + prp.h + 'vh - 3em)'))
 const dataLoading = computed(() => pageIndexState.ioading == 1)
 const data = computed((): Page.IndexDatas => pageIndexState.index_datas)
 const showbar = computed((): boolean => is_nice_arr(data.value)) 
+
+const pan = { idx: 99, hui: <ElePanHui>{ opacity: 0.4 } }
 </script>
 
 <style lang="sass" scoped>

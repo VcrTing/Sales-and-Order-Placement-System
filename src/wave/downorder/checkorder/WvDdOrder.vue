@@ -7,7 +7,7 @@
             <view class="py-col">
                 <view>
                     <view v-for="(c, a) in data" :key="a">
-                        <view class="py" v-for="(v, i) in funn.products(c.products)" :key="i">
+                        <view class="py" v-for="(v, i) in product_tool.get_num_products(c)" :key="i">
                             <view class="px-inp fx-aii-btn-def">
                                 <CoMoDdProductItem :v="v"/>
                             </view>
@@ -34,14 +34,10 @@
 </template>
 
 <script setup lang="ts">
-import OSafeAreaBottom from '@/cake/app/safearea/OSafeAreaBottom.vue';
-import OButton from '@/cake/button/OButton.vue';
 import CkSpace from '@/cake/content/CkSpace.vue';
-import { computed, onMounted, reactive } from 'vue';
 import CoMoDdProductItem from '../components/CoMoDdProductItem.vue';
 import WvDdRemarkBlock from '../remark/WvDdRemarkBlock.vue';
 import product_tool from '@/tool/modules/product/product_tool';
-import { future } from '@/tool/util/future';
 import { must_arr } from '@/tool/util/valued';
 
 const prp = defineProps<{

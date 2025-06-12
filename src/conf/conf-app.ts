@@ -8,6 +8,7 @@ export const APP_GENERATE_DETAIL = {
     desc: '给您好喝用心的茶点',
     avatar: '',
     name: '果果冰',
+    contact: '13576639986',
     desc_auth: '上同趣圈 找派对'
 }
 

@@ -1,5 +1,7 @@
 package com.q.buy.framework.result;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.q.buy.framework.common.pager.StrapiResultPager;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

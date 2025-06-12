@@ -21,12 +21,14 @@ const generate_pagination = (pageSize: number = PAGER_SIZE_DEF): Pager => {
 }
 
 // 构建参数
-const build_param = (param: ONE, pager: Pager, relations: string[]): ONE => {
-    if (is_strapi_mode()) {
+const build_param = (param: ONE, pager: Pager, relations: string[], istrapi: boolean = is_strapi_mode()): ONE => {
+    if (istrapi) {
         return strapi_param_tool.build_param(param, pager, relations)
     }
     else {
-        return { }
+        param['page'] = pager.page
+        param['pageSize'] = pager.pageSize
+        return param
     }
 }
 

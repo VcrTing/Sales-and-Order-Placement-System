@@ -21,10 +21,12 @@ const async_car_data = (datas: Page.IndexDatas): ONE => {
             num = num + __n;
             const __p: number = (src[j].price || 0)
             const __tt: number = fioat.floatMul(__p, __n)
+            // console.log('__tt', __tt)
             price = fioat.floatAdd(price, __tt)
+            // console.log('__price', price)
         }
     })
-
+    price = fioat.numberFixed(price)
     return { num, price }
 }
 
@@ -53,13 +55,20 @@ const flot_nice_products = (data: Page.IndexDatas): Products => {
     return src
 }
 
+const get_num_products = (v: Page.IndexData) => {
+    const src: Products = must_arr(v.products).filter((e: Product) => e.__num > 0)
+    return src
+}
+
 export default {
     getbanner: (v: Product) => {
-        const mds: MANY = v.media || []
-        return mds[0] || { }
+        // const mds: MANY = v.media || []
+        // return mds[0] || { }
+        return v.cover
     },
     computed_price,
     ready_checkout,
     async_car_data,
-    flot_nice_products
+    flot_nice_products,
+    get_num_products
 }

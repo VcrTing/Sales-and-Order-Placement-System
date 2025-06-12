@@ -11,12 +11,15 @@ import com.q.buy.module.order.service.OrderServiceImpl;
 import com.q.buy.module.order.tool.CheckOutTool;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping(NetConfig.API_LINK + "order/checkout")
-public class CheckOutController {
+@RequestMapping(NetConfig.API_LINK + "order/make")
+public class OrderMakeController {
 
     @Autowired
     OrderServiceImpl orderService;
@@ -36,14 +39,4 @@ public class CheckOutController {
         catch (Exception e) { e.printStackTrace(); return HResult.error(e.getMessage()); }
     }
 
-    // 新建订单
-    @PostMapping("pay")
-    public HResult<VoXOrderWhenCheckout> pay(@RequestBody OrderPayForm form) {
-        try {
-            return HResult.ok( VoXOrderWhenCheckout.init( checkOutTool.payment(form) ) );
-        }
-        catch (Exception e) { e.printStackTrace(); return HResult.error(e.getMessage()); }
-    }
-
-    //
 }

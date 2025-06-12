@@ -1,3 +1,4 @@
+import { arrimit } from "@/tool/util/iodash"
 
 const group_order_data = (form: ONE, xuser: User, products: Products) => {
     return {
@@ -20,6 +21,12 @@ const group_order_data = (form: ONE, xuser: User, products: Products) => {
     }
 }
 
+const get_show_products = (v: XOrder) => {
+    let ps: Products = v.products || [ ]
+    return ps
+}
+
 export default {
-    group_order_data
+    group_order_data,
+    get_show_products
 }

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OrderQueryParam {
 
-    String userCode;
+    String userDocumentId;
 
     Integer makeStatus;
     Integer payStatus;
@@ -35,8 +35,8 @@ public class OrderQueryParam {
 
     public LambdaQueryWrapper<XOrder> wrapper() {
         LambdaQueryWrapper<XOrder> wrapper = new LambdaQueryWrapper<>();
-        if (userCode != null) {
-            wrapper.eq(XOrder::getUserCode, userCode);
+        if (QVUtil.hasLen(userDocumentId)) {
+            wrapper.eq(XOrder::getUserDocumentId, userDocumentId);
         }
         if (QVUtil.serInt(makeStatus, -1) != -1) {
             wrapper.eq(XOrder::getMakeStatus, makeStatus);

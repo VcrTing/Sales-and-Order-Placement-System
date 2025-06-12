@@ -57,7 +57,7 @@ public class OrderAddForm {
         if (QVUtil.notLen(phone)) {
             throw new RuntimeException("没有电话送个屁单");
         }
-        if (QVUtil.notLen(userPhone) || QVUtil.notLen(userDocumentId)) {
+        if (QVUtil.notLen(userPhone)) {
             throw new RuntimeException("没有用户送个屁单");
         }
         if (price == null) {

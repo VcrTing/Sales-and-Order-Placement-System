@@ -6,12 +6,12 @@
             :class="'pan-' + me.orientation"
             :style="{ 'z-index': me.z_index }"
         >
-            <view class="pan-inner w-100 h-100 ps-r">
+            <view class="pan-inner w-100 h-100 ps-r" :class="'ani-fade-' + me.orientation + '-s'">
                 <slot></slot>
             </view>
         </view>
 
-        <view class="pan pan-hui soft"
+        <view class="pan pan-hui"
             v-if="is_hui && me.show" @tap="func.close"
             :style="{ 'z-index': (me.z_index - 1), 'opacity': (me.hui_opacity ? me.hui_opacity : 0) }"
         >

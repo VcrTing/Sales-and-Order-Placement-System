@@ -10,7 +10,8 @@
         <OScrollY
             :clazz="__clazz"
             :styie="{
-                'height': h ? h : '30vh'
+                'height': h ? h : 'auto',
+                'max-height': mxh ? mxh : '100vh'
             }">
             
             <slot></slot>
@@ -41,8 +42,8 @@ import OSafeAreaBottom from '../app/safearea/OSafeAreaBottom.vue';
 import OScrollY from '../ux/scroll/OScrollY.vue';
 import { computed } from 'vue';
 const prp = defineProps<{ 
-    idx: number, orientation: ORIENTATION, h?:string, close?: boolean,
-    clazz?: string
+    idx: number, orientation: ORIENTATION, close?: boolean,
+    clazz?: string, h?: string, mxh?: string
 }>()
 
 const __clazz = computed(() => {

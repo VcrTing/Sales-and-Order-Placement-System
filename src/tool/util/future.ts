@@ -10,7 +10,7 @@ export const future = async <T> (call: () => T | undefined): Promise<T | undefin
 
 export const timeout = <T> (call: () => T | null, haomiao: number = 0): number | undefined => call ? setTimeout(call, haomiao ? haomiao : 0) : undefined
 
-const REACTION_TIME: number = 198
+const REACTION_TIME: number = 7
 
 
 export const promising = <T> (

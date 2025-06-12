@@ -17,4 +17,6 @@ interface XOrder {
     name: string
     phone: string
     address: string
+
+    createdAt: string
 }
