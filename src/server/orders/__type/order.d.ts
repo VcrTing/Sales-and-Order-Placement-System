@@ -1,7 +1,7 @@
 
 interface XOrder {
     id: string
-    docmentId: string
+    documentId: string
     num: number
     price: number
     sendType: number

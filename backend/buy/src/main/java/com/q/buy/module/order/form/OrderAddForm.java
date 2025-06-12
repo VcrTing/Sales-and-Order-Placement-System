@@ -81,11 +81,11 @@ public class OrderAddForm {
                 JSONUtil.toJsonStr(products)
         );
         xOrder.setUserCode(userCode);
-        xOrder.setUserPhone(userPhone);
+        xOrder.setUserPhone(QVUtil.serStr(userPhone));
         xOrder.setUserDocumentId(userDocumentId);
 
         //
-        xOrder.setCreatedBy(userPhone);
+        xOrder.setCreatedBy(QVUtil.serStr(userPhone));
         xOrder.setCreatedAt(new Date());
         xOrder.setUpdatedAt(new Date());
         xOrder.setDeleted(0);
@@ -94,6 +94,8 @@ public class OrderAddForm {
         xOrder.setMakeStatus(0);
         xOrder.setPayStatus(0);
         xOrder.setSendStatus(0);
+        xOrder.setAliveStatus(0);
+        xOrder.setRefundStatus(0);
         //
 
         return xOrder;

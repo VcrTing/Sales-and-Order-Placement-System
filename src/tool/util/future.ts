@@ -12,6 +12,7 @@ export const timeout = <T> (call: () => T | null, haomiao: number = 0): number |
 
 const REACTION_TIME: number = 198
 
+
 export const promising = <T> (
         aii: ONE,
         call: () => T | undefined,
@@ -42,8 +43,13 @@ export const futuring = async <T> (
                 if (aii.ioading) { resolve(undefined); return }
                 else {
                     aii.ioading = true
-                    res = await call(); 
-                    timeout(() => aii.ioading = false, REACTION_TIME)
+                    try {
+                        res = await call(); 
+                    }
+                    catch (err) {  }
+                    finally {
+                        timeout(() => aii.ioading = false, REACTION_TIME)
+                    }
                 }
             }
             resolve(res ? res : undefined)

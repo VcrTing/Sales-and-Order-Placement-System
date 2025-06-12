@@ -13,6 +13,7 @@ const fetching = async (param: ONE = { }, pager: Pager): Promise<Category[]> => 
     const src: NET_RES = await netser(master.get('c', null, __pm))
     if (is_str(src)) return netip(src, [ ]);
     const res: ONE | MANY = (src as HttpResult).data
+    console.log('src =', src, res)
     return is_arr(res) ? (res as Category[]) : [ ]
 }
 

@@ -1,6 +1,6 @@
 import { authGetters, authState } from "@/memory/global"
 import { IS_NET_LOCAL, IS_NET_LOG, is_strapi_mode, IS_TEST_MODE } from "./conf"
-import { NET_ENDPOINT_BUSINESS, NET_ENDPOINT_FILE, NET_ENDPOINTS_MASTER } from "./conf-endpoints"
+import { NET_ENDPOINT_BUSINESS, NET_ENDPOINT_FILE, NET_ENDPOINT_SMALL, NET_ENDPOINTS_MASTER } from "./conf-endpoints"
 
 
 // 数据来源
@@ -76,7 +76,7 @@ export const NET_FUNCTION_GET_JWT = (): string => {
 export const NET_ENDPOINTS = <ONEO>{
     'MASTER': NET_ENDPOINTS_MASTER,
     'FILE': NET_ENDPOINT_FILE,
-    'SMALL': NET_ENDPOINT_FILE,
+    'SMALL': NET_ENDPOINT_SMALL,
     'BUSINESS': NET_ENDPOINT_BUSINESS
 }
 
@@ -87,5 +87,5 @@ export const NET_ERRORS_TXT = <ONE>{
     'request:fail': '网络波动 / 未检测到服务器运行。',
     'request:fail timeout': '网络超时，请重试。',
 
-    'Internal Server Error': '接口请求出错，请联络管理员。现在这个情况一般是登录失效了'
+    'Internal Server Error': '接口请求出错，请联络管理员。'
 }

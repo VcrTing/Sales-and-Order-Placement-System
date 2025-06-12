@@ -10,7 +10,7 @@
                             <OButton @tap="funn.phone_number" clazz="btn-app" color="wht">浏览器获取手机号，授权登录。</OButton>
                         </view>
                         <button v-else
-                            open-type="getPhoneNumber" 
+                            open-type="getPhoneNumber"
                             @getphonenumber="funn.phone_number"
                         >
                             <OButton clazz="btn-app" color="wht">获取手机号，授权登录。</OButton>
@@ -56,6 +56,8 @@ const funn = {
             TEST_LOGIN_USER.SMALL.info : 
             await uni.getUserProfile({ desc: '完善用户资料' })
         console.log('wx info =', info)
+        info['phone'] = TEST_LOGIN_USER.SMALL['phone']
+        info['countryCode'] = TEST_LOGIN_USER.SMALL['countryCode']
 
         if (has.id) {
             // 修改

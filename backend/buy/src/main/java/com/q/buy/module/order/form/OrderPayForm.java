@@ -1,5 +1,6 @@
 package com.q.buy.module.order.form;
 
+import com.q.buy.util.q.QVUtil;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderPayForm {
-    String id;
+    Long id;
     String documentId;
     Integer version;
 
@@ -23,4 +24,16 @@ public class OrderPayForm {
     String userDocumentId;
 
     // 微信支付的东西
+
+    public void checkData() {
+        if (QVUtil.notLen(QVUtil.serStr(version))) {
+            throw new RuntimeException("NO");
+        }
+        if (QVUtil.notLen(QVUtil.serStr(documentId))) {
+            throw new RuntimeException("NO");
+        }
+        if (QVUtil.notLen(QVUtil.serStr(userPhone))) {
+            throw new RuntimeException("NO");
+        }
+    }
 }

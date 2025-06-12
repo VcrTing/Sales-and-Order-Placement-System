@@ -1,4 +1,3 @@
-import confDev from "@/conf/conf-dev"
 import { appState } from "@/memory/global";
 import { tipwarn } from "./uni-global";
 

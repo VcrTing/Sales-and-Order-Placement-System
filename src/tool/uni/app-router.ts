@@ -7,5 +7,7 @@ export default {
     index: () => {
         uniRouter.navigatorpg('index')
     },
-    
+    red_paysucc: () => {
+        uniRouter.redpg('paysucc')
+    }
 }

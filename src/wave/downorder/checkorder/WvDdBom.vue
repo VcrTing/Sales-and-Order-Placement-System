@@ -8,7 +8,7 @@
                     <text class="fw-550 h5">{{ form.price }}</text>
                 </view>
                 <view>
-                    <OButton @tap="emt('submit')" clazz="btn-app br-t">
+                    <OButton :ioading="form.ioading" @tap="emt('submit')" clazz="btn-app br-t">
                         去支付
                     </OButton>
                 </view>

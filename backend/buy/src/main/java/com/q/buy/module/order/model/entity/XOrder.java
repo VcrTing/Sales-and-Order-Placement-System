@@ -1,5 +1,6 @@
 package com.q.buy.module.order.model.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -15,12 +16,12 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class XOrder {
-    @TableId
+    @TableId(type = IdType.INPUT) // (type = IdType.AUTO)
     Long id;
     String documentId;
     Date createdAt;
     Date updatedAt;
-    String updateBy;
+    String updatedBy;
     String createdBy;
     @TableLogic
     Integer deleted;
@@ -66,4 +67,13 @@ public class XOrder {
     String userDocumentId;
 
     // 对接微信支付的数据
+
+    // 退款数据
+    String refundReason;
+    String refundRemark;
+    Integer refundStatus;
+    BigDecimal refundPrice;
+
+    // 存货
+    Integer aliveStatus;
 }

@@ -20,8 +20,6 @@ public class XUserInfoWxParam {
 
     String smallAppAvatar;
     String smallAppAuthCode;
-    String smallAppIv;
-    String smallAppEncryptedData;
 
     String code;
     String phone;
@@ -42,13 +40,23 @@ public class XUserInfoWxParam {
     public LambdaQueryWrapper<XUser> wrapper() {
         LambdaQueryWrapper<XUser> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(XUser::getPhone, phone);
-        wrapper.eq(XUser::getCountryCode, countryCode);
+        // wrapper.eq(XUser::getCountryCode, countryCode);
         return wrapper;
     }
 
-    public XUser toEntity() {
-        XUser user = QBeanUtil.convert(this, XUser.class);
-        user.setUpdatedAt(new Date());
-        return user;
+    public XUser toEntity(XUser old) {
+        if (old == null) {
+            XUser user = QBeanUtil.convert(this, XUser.class);
+            user.setUpdatedAt(new Date());
+            return user;
+        }
+        else {
+            old.setGender(gender);
+            old.setNickname(nickname);
+            old.setSmallAppAvatar(smallAppAvatar);
+            old.setSmallAppAuthCode(smallAppAuthCode);
+            old.setUpdatedAt(new Date());
+            return old;
+        }
     }
 }

@@ -20,14 +20,14 @@ public class XUserInfoController {
     @Autowired
     XUserServiceImpl xUserService;
 
-    // /api/x-users/info/has
+    // /api/small/x-users/info/has
     @PostMapping("/has")
     public HResult<XUser> has(@RequestBody XUserInfoWxParam param ) {
         param.checkData();
         return HResult.ok( xUserService.hasUser(param) );
     }
 
-    // /api/x-users/info/save_or_update
+    // /api/small/x-users/info/save_or_update
     @PostMapping("/save_or_update")
     public HResult<XUser> get(@RequestBody XUserInfoWxParam param ) {
         param.checkData();

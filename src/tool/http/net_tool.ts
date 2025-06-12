@@ -6,6 +6,13 @@ import { is_nice_arr, must_arr, must_one } from "../util/valued"
 
 const PAGER_SIZE_DEF = 10
 
+// 生成返回结果
+const generate_http_result = (data: any, code: number, message: string) => {
+    return <HttpResult>{
+        code, message, data
+    }
+}
+
 // 生成分页
 const generate_pagination = (pageSize: number = PAGER_SIZE_DEF): Pager => {
     return <Pager>{
@@ -68,5 +75,7 @@ export default {
     build_data,
     data,
     one, ones,
-    group_document_id
+    group_document_id,
+
+    generate_http_result
 }

@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class XUser {
-    @TableId(type = IdType.AUTO)
+    @TableId // (type = IdType.AUTO)
     Long id;
     String documentId;
     Date createdAt;

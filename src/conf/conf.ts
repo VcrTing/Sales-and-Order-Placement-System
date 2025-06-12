@@ -23,7 +23,7 @@ export const TEST_LOGIN_USER: ONE = {
     },
     SMALL: <ONE> {
         phone: '13576639986',
-        countryCode: '86',
+        countryCode: 86,
         code: '1234567',
         info: {
             avatarUrl: "https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132",

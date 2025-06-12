@@ -6,6 +6,7 @@ import com.q.buy.framework.result.HResult;
 import com.q.buy.module.order.form.OrderAddForm;
 import com.q.buy.module.order.form.OrderPayForm;
 import com.q.buy.module.order.model.entity.XOrder;
+import com.q.buy.module.order.model.vo.VoXOrderWhenCheckout;
 import com.q.buy.module.order.service.OrderServiceImpl;
 import com.q.buy.module.order.tool.CheckOutTool;
 import lombok.extern.slf4j.Slf4j;
@@ -29,12 +30,18 @@ public class CheckOutController {
     // 新建订单
     @PostMapping("add")
     public HResult<XOrder> add(@RequestBody OrderAddForm form) {
-        return HResult.ok( checkOutTool.addOrder(form) );
+        try {
+            return HResult.ok( checkOutTool.addOrder(form) );
+        }
+        catch (Exception e) { e.printStackTrace(); return HResult.error(e.getMessage()); }
     }
 
     // 新建订单
     @PostMapping("pay")
-    public HResult<XOrder> pay(@RequestBody OrderPayForm form) {
-        return HResult.ok( checkOutTool.payment(form) );
+    public HResult<VoXOrderWhenCheckout> pay(@RequestBody OrderPayForm form) {
+        try {
+            return HResult.ok( VoXOrderWhenCheckout.init( checkOutTool.payment(form) ) );
+        }
+        catch (Exception e) { e.printStackTrace(); return HResult.error(e.getMessage()); }
     }
 }

@@ -56,7 +56,8 @@ public class XUserServiceImpl extends ServiceImpl<XUserMapper, XUser> {
 
     // 注册或改动用户数据
     public XUser saveOrUpdate(XUserInfoWxParam xUserInfoWxParam) {
-        XUser user = xUserInfoWxParam.toEntity();
+        List<XUser> oldList = phone(xUserInfoWxParam.getPhone());
+        XUser user = xUserInfoWxParam.toEntity(QListUtil.first(oldList));
         if (QVUtil.notLen(user.getDocumentId())) {
             // 新增
             user.setCreatedAt(new Date());
@@ -74,7 +75,7 @@ public class XUserServiceImpl extends ServiceImpl<XUserMapper, XUser> {
 
     // 微信获取用户数据
     public XUser hasUser(XUserInfoWxParam param) {
-        List<XUser> userList = this.list(param.wrapper());
+        List<XUser> userList = this.phone(param.getPhone());
         if (QListUtil.isBadList(userList)) {
             return null;
         }

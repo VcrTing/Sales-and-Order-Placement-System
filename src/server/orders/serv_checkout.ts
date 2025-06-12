@@ -12,6 +12,17 @@ const plus = async (param: ONE): Promise<XOrder> => {
     return net_tool.one<XOrder>(res)
 }
 
+const checkout = async (order: XOrder): Promise<XOrder> => {
+    const __pm: ONE = {
+        ...order
+    }
+    const src: NET_RES = await netser(business.pos('checkout', 'pay', __pm))
+    if (is_str(src)) return netip(src, <XOrder>{ });
+    const res: ONE | MANY = (src as HttpResult).data
+    return net_tool.one<XOrder>(res)
+}
+
 export default {
-    plus
+    plus,
+    checkout
 }

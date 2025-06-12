@@ -15,6 +15,7 @@ interface Product {
     cover: string
     price: number
     sort: number
+    view: number
     documentId: string
 
     __num: number

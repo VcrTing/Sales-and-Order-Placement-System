@@ -10,7 +10,7 @@ public final class QVUtil {
 
     public static String serStr(Object src) {
         if (src == null) return "";
-        return src.toString();
+        return src.toString().trim();
     }
 
     public static Integer serInt(Object src, Integer def) {
